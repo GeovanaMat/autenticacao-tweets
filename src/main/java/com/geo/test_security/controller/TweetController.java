@@ -4,6 +4,7 @@ import com.geo.test_security.controller.dto.TweetDto;
 import com.geo.test_security.entities.Tweet;
 import com.geo.test_security.repository.TweetRepository;
 import com.geo.test_security.repository.UserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +26,7 @@ public class TweetController {
         var user = userRepository.findById(Long.valueOf(token.getName()));
         var tweet = new Tweet();
 
+        return new ResponseEntity<>("Tweet Criado", HttpStatus.OK);
 
     }
 
