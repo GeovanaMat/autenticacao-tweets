@@ -31,17 +31,32 @@ public class AdminUserConfig implements CommandLineRunner {
     @Transactional
     public void run(String... args) throws Exception {
 
-//        var userAdmin = userRepository.findByUsername("admin");
-//        var roleAdmin = roleRepository.findByName(Role.Values.ADMIN);
-//        userAdmin.ifPresentOrElse(System.out::println, () -> {
-//            var user = new User();
-//            user.setUsername("admin");
-//            user.setPassword(bCryptPasswordEncoder.encode("123"));
-//            user.setRole(Set.of(roleAdmin));
-//            userRepository.save(user);
-//
-//        }  );
-//
+        var basicRole = roleRepository.findByName(Role.Values.BASIC);
+        var adminRole = roleRepository.findByName(Role.Values.ADMIN);
+
+       if(basicRole.isEmpty()){
+           var basic = new Role();
+           basic.setName(Role.Values.BASIC);
+           roleRepository.save(basic);
+       }
+
+        if(adminRole.isEmpty()){
+            var admin = new Role();
+            admin.setName(Role.Values.ADMIN);
+            roleRepository.save(admin);
+        }
+
+        var userAdmin = userRepository.findByUsername("admin");
+        var roleAdmin = roleRepository.findByName(Role.Values.ADMIN).get();
+        userAdmin.ifPresentOrElse(System.out::println, () -> {
+            var user = new User();
+            user.setUsername("admin");
+            user.setPassword(bCryptPasswordEncoder.encode("123"));
+            user.setRole(Set.of(roleAdmin));
+            userRepository.save(user);
+
+        }  );
+
 
     }
 }

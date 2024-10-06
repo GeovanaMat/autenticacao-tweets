@@ -24,7 +24,7 @@ public class Role {
     @Enumerated(value = EnumType.STRING)
     private Values name;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "role")
     private Set<User> user;
 
     public enum Values {
