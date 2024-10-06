@@ -26,7 +26,7 @@ public class TweetController {
         var user = userRepository.findById(Long.valueOf(token.getName()));
         var tweet = new Tweet();
 
-        return new ResponseEntity<>("Tweet Criado", HttpStatus.OK);
+        return new ResponseEntity<>("Tweet Criado com sucesso", HttpStatus.OK);
 
     }
 
